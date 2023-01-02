@@ -5,6 +5,7 @@ export interface Converter {
     operation: Operation
 
     number2: number
+    fromUnit:string
 
     resultFormat: string
     isSelectedTab: boolean
