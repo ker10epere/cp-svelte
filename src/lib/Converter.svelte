@@ -86,7 +86,7 @@
         <Tabs>
             {#each converters as converter}
                 <li class={converter.isSelectedTab ? "is-active" : null}>
-                    <a on:click={()=> onConverterClick(converter)}>
+                    <a on:click={()=> onConverterClick(converter)} href={null}>
                         <span>{converter.title}</span>
                     </a>
                 </li>
