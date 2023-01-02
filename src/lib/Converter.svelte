@@ -60,15 +60,17 @@
         copyResultToClipboard()
     }
 
-    function copyResultToClipboard(){
+    function copyResultToClipboard() {
         navigator.clipboard.writeText(result)
     }
+
+    $: evaluatedResult = evaluate(number1, currentConverter)
 
     $: result = formatResult({
         number1,
         number1DecimalPoint: 2,
         resultDecimalPoint: 2,
-        result: evaluate(number1, currentConverter)
+        result: evaluatedResult
     }, currentConverter)
 </script>
 
@@ -80,9 +82,8 @@
                    on:input={handleNumber1Input} value={number1}
                    on:click={handleNumber1Click}>
             <span class="button is-medium mx-3 is-disabled" style="width: 200px">{currentConverter.fromUnit}</span>
-            <button class="button is-medium is-success ">Copy</button>
+            <button class="button is-medium is-success ">copy result</button>
         </div>
-
         <Tabs>
             {#each converters as converter}
                 <li class={converter.isSelectedTab ? "is-active" : null}>
@@ -94,5 +95,18 @@
         </Tabs>
         <button type="submit" class="is-hidden"></button>
     </form>
-    <pre>{result}</pre>
+    <div>
+        Computation:
+        <pre>{number1} {currentConverter.fromUnit} <b class="mx-3">{currentConverter.operation}</b> {currentConverter.number2} = {evaluatedResult}</pre>
+        Result:<br/>
+        <pre class="is-rounded">
+            {result}
+        </pre>
+    </div>
 </div>
+
+<style>
+    pre {
+        white-space: pre-line;
+    }
+</style>

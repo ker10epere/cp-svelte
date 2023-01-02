@@ -1,7 +1,7 @@
 export enum Operation {
-    add,
-    subtract,
-    multiply,
+    add = '+',
+    subtract = '-',
+    multiply = '*',
 
-    divide
+    divide = '/'
 }
