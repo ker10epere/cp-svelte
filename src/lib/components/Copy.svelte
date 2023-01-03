@@ -10,15 +10,15 @@
 
     let textareas: Textarea[] = JSON.parse(Cookies.get('textareas') || '[]')
 
-    function scrollInBottonOnBottom() {
+    function scrollInBottonOnBottom(isRemove: boolean = false) {
         const submitButton = document.getElementById('cp-submit-button');
         const {top} = submitButton.getBoundingClientRect()
-        window.scrollTo(0, top - document.body.getBoundingClientRect().top - (window.innerHeight - submitButton.getBoundingClientRect().height * 3))
+        window.scrollTo(0, top - document.body.getBoundingClientRect().top - (window.innerHeight - submitButton.getBoundingClientRect().height * (isRemove ? 0.5 : 3)))
     }
 
     function remove(textarea: Textarea) {
         textareas = textareas.filter(({id}) => id !== textarea.id)
-        scrollInBottonOnBottom();
+        scrollInBottonOnBottom(true);
 
     }
 
