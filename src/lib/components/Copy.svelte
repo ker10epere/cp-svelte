@@ -10,20 +10,22 @@
 
     let textareas: Textarea[] = JSON.parse(Cookies.get('textareas') || '[]')
 
+    function scrollInBottonOnBottom() {
+        const submitButton = document.getElementById('cp-submit-button');
+        const {top} = submitButton.getBoundingClientRect()
+        window.scrollTo(0, top - document.body.getBoundingClientRect().top - (window.innerHeight - submitButton.getBoundingClientRect().height * 3))
+    }
+
     function remove(textarea: Textarea) {
         textareas = textareas.filter(({id}) => id !== textarea.id)
+        scrollInBottonOnBottom();
+
     }
 
     function add() {
         textareas = [...textareas, {title: "", text: "", id: uuidv4()}]
         activeElementNotifUtil()
-
-        const submitButton = document.getElementById('cp-submit-button');
-        // console.dir(submitButton)
-        const {top, height} = submitButton.getBoundingClientRect()
-        console.log({height, top})
-        window.scrollTo(0, +top - document.body.getBoundingClientRect().top - (window.innerHeight - submitButton.getBoundingClientRect().height * 3))
-
+        scrollInBottonOnBottom();
     }
 
     function copy(text: string) {
