@@ -123,8 +123,8 @@
             <input type="text" inputmode="numeric" class="input is-medium is-hovered" name="number1"
                    on:input={handleNumber1Input} value={number1}
                    on:click={handleNumber1Click}>
-            <span class="button is-medium mx-3 is-disabled" style="width: 200px">{currentConverter.fromUnit}</span>
-            <button class="button is-medium is-success ">copy result</button>
+            <span class="button is-medium mx-3 is-disabled disable-effect" style="width: 200px">{currentConverter.fromUnit}</span>
+            <button class="button is-medium is-success">copy result</button>
         </div>
         <Tabs>
             {#each converters as converter}
@@ -139,7 +139,8 @@
     </form>
     <div>
         Computation:
-        <pre>{number1} {currentConverter.fromUnit} <b class="mx-3">{currentConverter.operation}</b> {currentConverter.number2} = {evaluatedResult}</pre>
+        <pre>{number1} {currentConverter.fromUnit} <b
+                class="mx-3">{currentConverter.operation}</b> {currentConverter.number2} = {evaluatedResult}</pre>
         Result:<br/>
         <pre class="is-rounded">
             {result}
