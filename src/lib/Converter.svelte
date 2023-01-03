@@ -66,16 +66,16 @@
         }
     ]
 
-    let currentConverter: Converter = converters[0]
+    let currentConverterState: Converter = converters[0]
 
-    let number1 = 0
+    let number1State = 0
 
     function onConverterClick(item: Converter) {
-        currentConverter = {
+        currentConverterState = {
             ...item, isSelectedTab: true
         }
         converters = converters.map(converter => {
-            if (converter === item) return currentConverter
+            if (converter === item) return currentConverterState
             converter.isSelectedTab = false
             return converter
         })
@@ -85,16 +85,16 @@
         const {value} = e.currentTarget
         if (value === '') {
             setValueToZero(e)
-            number1 = 0
+            number1State = 0
         } else {
-            number1 = parseFloat(value);
+            number1State = parseFloat(value);
         }
 
     }
 
     function handleNumber1Click(e: EventElement<HTMLInputElement>) {
         setValueToZero(e)
-        number1 = 0
+        number1State = 0
     }
 
     function handleFormSubmit(e: SubmitEvent & EventElement<any>) {
@@ -106,14 +106,14 @@
         navigator.clipboard.writeText(result)
     }
 
-    $: evaluatedResult = evaluate(number1, currentConverter)
+    $: evaluatedResult = evaluate(number1State, currentConverterState)
 
     $: result = formatResult({
-        number1,
+        number1: number1State,
         number1DecimalPoint: 2,
         resultDecimalPoint: 2,
         result: evaluatedResult
-    }, currentConverter)
+    }, currentConverterState)
 </script>
 
 
@@ -121,9 +121,9 @@
     <form on:submit={handleFormSubmit}>
         <div class="my-3 is-flex">
             <input type="text" inputmode="numeric" class="input is-medium is-hovered" name="number1"
-                   on:input={handleNumber1Input} value={number1}
+                   on:input={handleNumber1Input} value={number1State}
                    on:click={handleNumber1Click}>
-            <span class="button is-medium mx-3 is-disabled disable-effect" style="width: 200px">{currentConverter.fromUnit}</span>
+            <span class="button is-medium mx-3 is-disabled disable-effect" style="width: 200px">{currentConverterState.fromUnit}</span>
             <button class="button is-medium is-success">copy result</button>
         </div>
         <Tabs>
@@ -139,8 +139,8 @@
     </form>
     <div>
         Computation:
-        <pre>{number1} {currentConverter.fromUnit} <b
-                class="mx-3">{currentConverter.operation}</b> {currentConverter.number2} = {evaluatedResult}</pre>
+        <pre>{number1State} {currentConverterState.fromUnit} <b
+                class="mx-3">{currentConverterState.operation}</b> {currentConverterState.number2} = {evaluatedResult}</pre>
         Result:<br/>
         <pre class="is-rounded">
             {result}
