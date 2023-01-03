@@ -1,3 +1,11 @@
 .disable-effect {
     pointer-events: none !important;
 }
+
+.white-space-normal {
+    white-space: normal;
+}
+
+.white-space-pre-line {
+    white-space: pre-line;
+}

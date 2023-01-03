@@ -11,58 +11,66 @@
             title: "Random Blood Sugar",
             operation: Operation.multiply,
             number2: 18.02,
-            resultFormat: "Random Blood Sugar: ##NUMBER1## mmol/L (##RESULT## mg/dL)\nNon-fasting specimen",
+            resultFormat: "Random Blood Sugar: ##NUMBER1## mmol/L (##RESULT## ##TO_UNIT##)\nNon-fasting specimen",
             isSelectedTab: true,
-            fromUnit: 'mmol/L'
+            fromUnit: 'mmol/L',
+            toUnit: 'mg/dL'
         }, {
             title: "Creatinine",
             operation: Operation.divide,
             number2: 88.42,
-            resultFormat: "##RESULT## mg/dL",
+            resultFormat: "##RESULT## ##TO_UNIT##",
             isSelectedTab: false,
-            fromUnit: 'umol/L'
+            fromUnit: 'umol/L',
+            toUnit: 'mg/dL'
         }, {
             title: "Calcium",
             operation: Operation.divide,
             number2: 0.2495,
-            resultFormat: "##RESULT## mg/dL",
+            resultFormat: "##RESULT## ##TO_UNIT##",
             isSelectedTab: false,
-            fromUnit: 'mmol/L'
+            fromUnit: 'mmol/L',
+            toUnit: 'mg/dL'
         }, {
             title: "Magnesium",
             operation: Operation.divide,
             number2: 0.41152,
-            resultFormat: "##RESULT## mg/dL",
+            resultFormat: "##RESULT## ##TO_UNIT##",
             isSelectedTab: false,
-            fromUnit: 'mmol/L'
+            fromUnit: 'mmol/L',
+            toUnit: 'mg/dL'
         }, {
             title: "Bilirubin",
             operation: Operation.divide,
             number2: 17.1,
-            resultFormat: "##RESULT## mg/dL",
+            resultFormat: "##RESULT## ##TO_UNIT##",
             isSelectedTab: false,
-            fromUnit: 'umol/L'
+            fromUnit: 'umol/L',
+            toUnit: 'mg/dL'
         }, {
             title: "Phosporus",
             operation: Operation.divide,
             number2: 0.3229,
-            resultFormat: "##RESULT## mg/dL",
+            resultFormat: "##RESULT## ##TO_UNIT##",
             isSelectedTab: false,
-            fromUnit: 'mmol/L'
+            fromUnit: 'mmol/L',
+            toUnit: 'mg/dL'
         }, {
             title: "Urea",
             operation: Operation.divide,
             number2: 0.3571,
-            resultFormat: "##RESULT## mg/dL",
+            resultFormat: "##RESULT## ##TO_UNIT##",
             isSelectedTab: false,
-            fromUnit: 'mmol/L'
+            fromUnit: 'mmol/L',
+            toUnit: 'mg/dL'
         }, {
             title: "Glucose",
             operation: Operation.divide,
             number2: 0.0555,
-            resultFormat: "##RESULT## mg/dL",
+            resultFormat: "##RESULT## ##TO_UNIT##",
             isSelectedTab: false,
-            fromUnit: 'mmol/L'
+            fromUnit: 'mmol/L',
+            toUnit: 'mg/dL'
         }
     ]
 
@@ -123,7 +131,8 @@
             <input type="text" inputmode="numeric" class="input is-medium is-hovered" name="number1"
                    on:input={handleNumber1Input} value={number1State}
                    on:click={handleNumber1Click}>
-            <span class="button is-medium mx-3 is-disabled disable-effect" style="width: 200px">{currentConverterState.fromUnit}</span>
+            <span class="button is-medium mx-3 is-disabled disable-effect"
+                  style="width: 200px">{currentConverterState.fromUnit}</span>
             <button class="button is-medium is-success">copy result</button>
         </div>
         <Tabs>
@@ -139,17 +148,12 @@
     </form>
     <div>
         Computation:
-        <pre>{number1State} {currentConverterState.fromUnit} <b
-                class="mx-3">{currentConverterState.operation}</b> {currentConverterState.number2} = {evaluatedResult}</pre>
-        Result:<br/>
-        <pre class="is-rounded">
+        <pre class="white-space-normal">{number1State} {currentConverterState.fromUnit} <b
+                class="mx-3">{currentConverterState.operation}</b> {currentConverterState.number2}
+            <br/>= {evaluatedResult} {currentConverterState.toUnit}</pre>
+        Result:
+        <pre class="white-space-pre-line">
             {result}
         </pre>
     </div>
 </div>
-
-<style>
-    pre {
-        white-space: pre-line;
-    }
-</style>

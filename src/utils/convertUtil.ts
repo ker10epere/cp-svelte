@@ -20,7 +20,8 @@ export function formatResult({
                                  number1DecimalPoint,
                                  resultDecimalPoint
                              }: { number1: number, number1DecimalPoint: number, result: number, resultDecimalPoint: number },
-                             {resultFormat}: Converter): string {
+                             {resultFormat, toUnit}: Converter): string {
     return resultFormat.replace("##NUMBER1##", number1.toFixed(number1DecimalPoint).toString())
         .replace("##RESULT##", result.toFixed(resultDecimalPoint).toString())
+        .replace("##TO_UNIT##", toUnit)
 }
