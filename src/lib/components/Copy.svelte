@@ -4,7 +4,7 @@
     import {v4 as uuidv4} from 'uuid';
     import {CopyToClipboard} from "../../utils/copyToClipboard";
     import type {ElementClassList} from "../../types/elementClassList";
-    import {activeElementNotifUtil} from "../../utils/activeElementNotifUtil";
+    import {activeElementNotifUtil, elementNotifUtil} from "../../utils/activeElementNotifUtil";
     import Cookies from "js-cookie";
 
     let textareas: Textarea[] = JSON.parse(Cookies.get('textareas') || '[]')
@@ -30,6 +30,18 @@
         activeElementNotifUtil()
     }
 
+    function handleTitleClick({target: {nextElementSibling: textarea}}: HTMLInputElement) {
+        CopyToClipboard(textarea.value)
+        elementNotifUtil(textarea)
+    }
+
+    function handleTitleKeydown({code, target: {nextElementSibling: textarea}}: HTMLInputElement) {
+        if (code === 'Enter') {
+            CopyToClipboard(textarea.value)
+            elementNotifUtil(textarea)
+        }
+    }
+
     function onKeyDown(e: KeyboardEvent) {
         const isCopyPressed = e.code === 'Enter' && e.ctrlKey
         let activeElement = document.activeElement as HTMLTextAreaElement & HTMLInputElement & ElementClassList;
@@ -52,7 +64,8 @@
     <div id="cp-row-container">
 
         {#each textareas as textarea}
-            <Row bind:textarea handleRemoveButton={remove} handleCopyButton={copy}/>
+            <Row bind:textarea handleRemoveButton={remove} handleCopyButton={copy} {handleTitleClick}
+                 {handleTitleKeydown}/>
         {/each}
 
     </div>
