@@ -21,6 +21,48 @@
             resultFormat: "##RESULT## mg/dL",
             isSelectedTab: false,
             fromUnit: 'umol/L'
+        }, {
+            title: "Calcium",
+            operation: Operation.divide,
+            number2: 0.2495,
+            resultFormat: "##RESULT## mg/dL",
+            isSelectedTab: false,
+            fromUnit: 'mmol/L'
+        }, {
+            title: "Magnesium",
+            operation: Operation.divide,
+            number2: 0.41152,
+            resultFormat: "##RESULT## mg/dL",
+            isSelectedTab: false,
+            fromUnit: 'mmol/L'
+        }, {
+            title: "Bilirubin",
+            operation: Operation.divide,
+            number2: 17.1,
+            resultFormat: "##RESULT## mg/dL",
+            isSelectedTab: false,
+            fromUnit: 'umol/L'
+        }, {
+            title: "Phosporus",
+            operation: Operation.divide,
+            number2: 0.3229,
+            resultFormat: "##RESULT## mg/dL",
+            isSelectedTab: false,
+            fromUnit: 'mmol/L'
+        }, {
+            title: "Urea",
+            operation: Operation.divide,
+            number2: 0.3571,
+            resultFormat: "##RESULT## mg/dL",
+            isSelectedTab: false,
+            fromUnit: 'mmol/L'
+        }, {
+            title: "Glucose",
+            operation: Operation.divide,
+            number2: 0.0555,
+            resultFormat: "##RESULT## mg/dL",
+            isSelectedTab: false,
+            fromUnit: 'mmol/L'
         }
     ]
 
