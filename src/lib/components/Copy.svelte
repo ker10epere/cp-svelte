@@ -14,8 +14,15 @@
     }
 
     function add() {
-        textareas = [...textareas, {text: "", id: uuidv4()}]
+        textareas = [...textareas, {title: "", text: "", id: uuidv4()}]
         activeElementNotifUtil()
+
+        const submitButton = document.getElementById('cp-submit-button');
+        // console.dir(submitButton)
+        const {top, height} = submitButton.getBoundingClientRect()
+        console.log({height, top})
+        window.scrollTo(0, +top - document.body.getBoundingClientRect().top - (window.innerHeight - submitButton.getBoundingClientRect().height * 3))
+
     }
 
     function copy(text: string) {
@@ -42,7 +49,7 @@
     $: setTextareasCookie(textareas)
 </script>
 <div>
-    <div>
+    <div id="cp-row-container">
 
         {#each textareas as textarea}
             <Row bind:textarea handleRemoveButton={remove} handleCopyButton={copy}/>
@@ -50,7 +57,7 @@
 
     </div>
     <div class="is-flex is-flex-direction-column">
-        <button class="button" on:click={add}>Add</button>
+        <button class="button" id="cp-submit-button" on:click={add}>Add</button>
     </div>
 </div>
 <svelte:window on:keydown={onKeyDown}/>

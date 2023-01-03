@@ -7,7 +7,9 @@
     export let textarea: Textarea
 </script>
 <div class="is-flex container my-2">
-    <textarea style:width="100%" use:autosize bind:value={textarea.text} name="cp-textarea" placeholder="(ctrl + enter) to copy"></textarea>
+    <input type="text" style:width="200px" class="mr-1" placeholder="title" bind:value={textarea.title}>
+    <textarea style:width="100%" use:autosize bind:value={textarea.text} name="cp-textarea"
+              placeholder="(ctrl + enter) to copy"></textarea>
     <button class="button mx-1" on:click={async ()=> await handleCopyButton(textarea.text)}>copy</button>
     <button class="button" on:click={()=>handleRemoveButton(textarea)}>remove</button>
 </div>
