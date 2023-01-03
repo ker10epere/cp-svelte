@@ -16,7 +16,7 @@
     <input type="text" style:width="200px" class="mr-1" placeholder="title" bind:value={textarea.title} name="cp-title"
            on:click={handleTitleClick} on:keydown={handleTitleKeydown}>
     <textarea style:width="100%" use:autosize bind:value={textarea.text} name="cp-textarea"
-              placeholder="(ctrl + enter) to copy"></textarea>
+              placeholder="focus on this textbox and (ctrl + enter) to copy this, or (click or enter in left title to copy this textbox)"></textarea>
     <button class="button mx-1" on:click={async ()=> await handleCopyButton(textarea.text)}>copy</button>
     <button class="button" on:click={()=>handleRemoveButton(textarea)}>remove</button>
 </div>
