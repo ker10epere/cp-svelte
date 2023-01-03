@@ -5,6 +5,8 @@
     import type {EventElement} from "../types/eventElement";
     import {setValueToZero} from "../utils/formUtil";
     import {evaluate, formatResult} from "../utils/convertUtil.js";
+    import {CopyToClipboard} from "../utils/copyToClipboard";
+    import {activeElementNotifUtil} from "../utils/activeElementNotifUtil";
 
     let converters: Converter[] = [
         {
@@ -108,10 +110,11 @@
     function handleFormSubmit(e: SubmitEvent & EventElement<any>) {
         e.preventDefault()
         copyResultToClipboard()
+        activeElementNotifUtil()
     }
 
     function copyResultToClipboard() {
-        navigator.clipboard.writeText(result)
+        CopyToClipboard(result)
     }
 
     $: evaluatedResult = evaluate(number1State, currentConverterState)
@@ -125,7 +128,7 @@
 </script>
 
 
-<div class="is-flex is-flex-direction-column container is-max-desktop">
+<div>
     <form on:submit={handleFormSubmit}>
         <div class="my-3 is-flex">
             <input type="text" inputmode="numeric" class="input is-medium is-hovered" name="number1"
@@ -133,7 +136,7 @@
                    on:click={handleNumber1Click}>
             <span class="button is-medium mx-3 is-disabled disable-effect"
                   style="width: 200px">{currentConverterState.fromUnit}</span>
-            <button class="button is-medium is-success">copy result</button>
+            <button class="button is-medium">copy result</button>
         </div>
         <Tabs>
             {#each converters as converter}
