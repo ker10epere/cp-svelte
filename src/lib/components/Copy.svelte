@@ -6,6 +6,7 @@
     import type {ElementClassList} from "../../types/elementClassList";
     import {activeElementNotifUtil, elementNotifUtil} from "../../utils/activeElementNotifUtil";
     import Cookies from "js-cookie";
+    import autoAnimate from '@formkit/auto-animate';
 
     let textareas: Textarea[] = JSON.parse(Cookies.get('textareas') || '[]')
 
@@ -61,16 +62,16 @@
     $: setTextareasCookie(textareas)
 </script>
 <div>
-    <div id="cp-row-container">
+    <ul id="cp-row-container" use:autoAnimate>
 
         {#each textareas as textarea}
             <Row bind:textarea handleRemoveButton={remove} handleCopyButton={copy} {handleTitleClick}
                  {handleTitleKeydown}/>
         {/each}
 
-    </div>
+    </ul>
     <div class="is-flex is-flex-direction-column">
-        <button class="button" id="cp-submit-button" on:click={add}>Add</button>
+        <button use:autoAnimate class="button" id="cp-submit-button" on:click={add}>Add</button>
     </div>
 </div>
 <svelte:window on:keydown={onKeyDown}/>
